@@ -18,3 +18,4 @@ imagehash
 pytesseract
 streamlit_webrtc
 av
+libgl1
