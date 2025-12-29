@@ -1,0 +1,13 @@
+image_name,image_path,has_label,label_path,laplacian_variance,is_blurry
+20230614_150814ll.jpg,DataSet/images/20230614_150814ll.jpg,True,DataSet/yolo_labels/20230614_150814ll.txt,1124.8241156798013,False
+20230614_150932ll.jpg,DataSet/images/20230614_150932ll.jpg,True,DataSet/yolo_labels/20230614_150932ll.txt,1760.4490523280556,False
+20230620_160513ll.jpg,DataSet/images/20230620_160513ll.jpg,True,DataSet/yolo_labels/20230620_160513ll.txt,156.63311690462183,False
+20230620_160128ll.jpg,DataSet/images/20230620_160128ll.jpg,True,DataSet/yolo_labels/20230620_160128ll.txt,25.11815957849153,True
+20230614_151238ll.jpg,DataSet/images/20230614_151238ll.jpg,True,DataSet/yolo_labels/20230614_151238ll.txt,85.68638033029016,True
+20230620_160525ll.jpg,DataSet/images/20230620_160525ll.jpg,True,DataSet/yolo_labels/20230620_160525ll.txt,439.737577166484,False
+20230614_150831ll.jpg,DataSet/images/20230614_150831ll.jpg,True,DataSet/yolo_labels/20230614_150831ll.txt,511.2254902096321,False
+20230620_161149ll.jpg,DataSet/images/20230620_161149ll.jpg,True,DataSet/yolo_labels/20230620_161149ll.txt,415.9305484995232,False
+20230620_160124ll.jpg,DataSet/images/20230620_160124ll.jpg,True,DataSet/yolo_labels/20230620_160124ll.txt,283.6402419432766,False
+20230620_160108ll.jpg,DataSet/images/20230620_160108ll.jpg,True,DataSet/yolo_labels/20230620_160108ll.txt,2365.647959286748,False
+20230620_160033ll.jpg,DataSet/images/20230620_160033ll.jpg,True,DataSet/yolo_labels/20230620_160033ll.txt,576.4542798979212,False
+20230620_161023ll.jpg,DataSet/images/20230620_161023ll.jpg,True,DataSet/yolo_labels/20230620_161023ll.txt,147.96387972747482,False

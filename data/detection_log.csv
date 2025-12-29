@@ -1,0 +1,2 @@
+entry_datetime,threshold,ocr_text,original_image_path,predicted_image_path
+2025-12-29 05:22:54,0.4,ND,data/originals/img_20251229_052246.jpg,data/predictions/pred_20251229_052246.jpg
