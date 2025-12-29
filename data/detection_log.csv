@@ -1,2 +1,4 @@
 entry_datetime,threshold,ocr_text,original_image_path,predicted_image_path
 2025-12-29 05:22:54,0.4,ND,data/originals/img_20251229_052246.jpg,data/predictions/pred_20251229_052246.jpg
+2025-12-29 20:26:42,0.4,,data/originals/img_20251229_202641.jpg,data/predictions/pred_20251229_202641.jpg
+2025-12-29 20:27:19,0.1,,data/originals/img_20251229_202702.jpg,data/predictions/pred_20251229_202702.jpg
