@@ -10,10 +10,7 @@ import re
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(page_title="Live Camera Detection", layout="wide")
 st.title("📷 Live Camera Detection")
-
-st.markdown(
-    "Real-time number plate detection using live camera feed with OCR output.",
-)
+st.markdown("Real-time number plate detection using live camera feed with OCR output.")
 
 # ---------------- LOAD MODEL ----------------
 @st.cache_resource
@@ -37,6 +34,10 @@ confidence = st.slider(
 )
 
 st.markdown(f"**Selected Threshold:** `{confidence:.2f}`")
+
+# ---------------- SESSION STATE (CRITICAL FIX) ----------------
+if "camera_started" not in st.session_state:
+    st.session_state.camera_started = False
 
 # ---------------- VIDEO PROCESSOR ----------------
 class VideoProcessor(VideoProcessorBase):
@@ -67,15 +68,9 @@ class VideoProcessor(VideoProcessorBase):
                     ocr_text = re.sub(r'[^A-Z0-9]', '', ocr_result[0])
 
             # ---- Draw thick bounding box ----
-            cv2.rectangle(
-                img,
-                (x1, y1),
-                (x2, y2),
-                (0, 255, 0),
-                3
-            )
+            cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 3)
 
-            # ---- Label (OCR + confidence only) ----
+            # ---- Label: OCR + confidence only ----
             label = f"{ocr_text} ({conf_score:.2f})" if ocr_text else f"({conf_score:.2f})"
 
             cv2.putText(
@@ -90,29 +85,41 @@ class VideoProcessor(VideoProcessorBase):
 
         return av.VideoFrame.from_ndarray(img, format="bgr24")
 
-# ---------------- WEBRTC STREAM ----------------
-webrtc_streamer(
-    key="live-camera-detection",
-    mode=WebRtcMode.SENDRECV,
-    video_processor_factory=VideoProcessor,
-    media_stream_constraints={"video": True, "audio": False},
-    rtc_configuration={
-        "iceServers": [
-            # STUN (fast path)
-            {"urls": ["stun:stun.l.google.com:19302"]},
+# ---------------- UI CONTROLS ----------------
+col1, col2 = st.columns(2)
 
-            # TURN (fallback for restrictive networks)
-            {
-                "urls": ["turn:openrelay.metered.ca:80"],
-                "username": "openrelayproject",
-                "credential": "openrelayproject"
-            }
-        ]
-    }
-)
+with col1:
+    if not st.session_state.camera_started:
+        if st.button("▶ Start Camera", use_container_width=True):
+            st.session_state.camera_started = True
+            st.rerun()
 
+with col2:
+    if st.session_state.camera_started:
+        if st.button("⏹ Stop Camera", use_container_width=True):
+            st.session_state.camera_started = False
+            st.rerun()
 
-# ---------------- FOOTER NOTE ----------------
+# ---------------- WEBRTC STREAM (SAFE) ----------------
+if st.session_state.camera_started:
+    webrtc_streamer(
+        key="live-camera-detection",  # MUST stay constant
+        mode=WebRtcMode.SENDRECV,
+        video_processor_factory=VideoProcessor,
+        media_stream_constraints={"video": True, "audio": False},
+        rtc_configuration={
+            "iceServers": [
+                {"urls": ["stun:stun.l.google.com:19302"]},
+                {
+                    "urls": ["turn:openrelay.metered.ca:80"],
+                    "username": "openrelayproject",
+                    "credential": "openrelayproject",
+                },
+            ]
+        },
+    )
+
+# ---------------- FOOTER ----------------
 st.divider()
 st.markdown(
     "<p style='text-align:center;color:gray;'>Live Camera Detection • YOLO + OCR</p>",
