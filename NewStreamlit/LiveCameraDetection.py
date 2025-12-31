@@ -96,7 +96,21 @@ webrtc_streamer(
     mode=WebRtcMode.SENDRECV,
     video_processor_factory=VideoProcessor,
     media_stream_constraints={"video": True, "audio": False},
+    rtc_configuration={
+        "iceServers": [
+            # STUN (fast path)
+            {"urls": ["stun:stun.l.google.com:19302"]},
+
+            # TURN (fallback for restrictive networks)
+            {
+                "urls": ["turn:openrelay.metered.ca:80"],
+                "username": "openrelayproject",
+                "credential": "openrelayproject"
+            }
+        ]
+    }
 )
+
 
 # ---------------- FOOTER NOTE ----------------
 st.divider()

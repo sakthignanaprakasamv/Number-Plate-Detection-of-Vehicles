@@ -1,9 +1,8 @@
 ultralytics
-opencv-python
+opencv-python-headless==4.12.0.88
 pandas
 numpy
 Pillow
-pillow-heif
 tqdm
 albumentations
 matplotlib
@@ -18,4 +17,3 @@ imagehash
 pytesseract
 streamlit_webrtc
 av
-libgl1
