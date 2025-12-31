@@ -15,5 +15,5 @@ plotly
 pyngrok
 imagehash
 pytesseract
-streamlit_webrtc
+streamlit-webrtc==0.47.7
 av
